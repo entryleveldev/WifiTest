@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +27,25 @@ public class MainActivity extends Activity {
 		registerReceiver(receiver,
 				mIntentFilter);
 	}
+	
+	
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		unregisterReceiver(receiver);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		registerReceiver(receiver,
+				mIntentFilter);
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,6 +68,8 @@ public class MainActivity extends Activity {
 	                e.printStackTrace();
 	            }
 	            Log.v("msg", "Disconnect  WifiDataReceiver");
+	            WifiManager myWifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
+	            myWifiManager.setWifiEnabled(false);
 	        } else {
 	            Log.v("msg", "connected");
 	        }
