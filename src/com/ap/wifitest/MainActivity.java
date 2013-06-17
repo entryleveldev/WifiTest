@@ -41,6 +41,12 @@ public class MainActivity extends Activity {
 	        NetworkInfo.State mWifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
 	        Log.v("msg", "mWifi : " + mWifi);
 	        if (mWifi != NetworkInfo.State.CONNECTED){
+	        	try {
+	                Thread.sleep(10000);
+	            } catch (InterruptedException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
 	            Log.v("msg", "Disconnect  WifiDataReceiver");
 	        } else {
 	            Log.v("msg", "connected");
